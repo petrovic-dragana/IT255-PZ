@@ -1,0 +1,103 @@
+<button class="logout" (click)="logout()">Logout</button>
+<table *ngIf="filmovi">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Trajanje</th>
+            <th>Zanr</th>
+            <th>Ocena</th>
+            <th>Broj gledaoca</th>
+            <th>Cena</th>
+            <th>Odaberi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let filmo of filmovi">
+            <td>{{filmo.naziv}}</td>
+            <td>{{filmo.trajanje}}</td>
+            <td>{{filmo.zanr}}</td>
+            <td>{{filmo.ocena}}</td>
+            <td>{{filmo.brgledaoca}}</td>
+            <td>{{filmo.cena}} <b>RSD</b></td>
+            <td>
+                <button (click)="azurirajFilm(filmo)">Ažuriraj</button>
+                <button (click)="obrisiFilm(filmo.id)">Obriši</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="!filmovi">
+    <p>Loading...</p>
+</div>
+
+<form [formGroup]="filmForm">
+    <div class="forma">
+
+
+        <label for="naziv">Naziv</label>
+        <input type="text" formControlName="naziv" id="naziv" name="naziv" required>
+        <div class="validacija" *ngIf="filmForm.get('naziv')?.hasError('required') && filmForm.get('naziv')?.touched">
+            Naziv iz je obavezno polje.
+        </div>
+
+
+        <label for="trajanje">Trajanje</label>
+        <input type="text" formControlName="trajanje" id="trajanje" name="trajanje" required>
+        <div class="validacija"
+            *ngIf="filmForm.get('trajanje')?.hasError('required') && filmForm.get('trajanje')?.touched">
+            Trajanje je obavezno polje.
+        </div>
+
+        <label for="zanr">Zanr</label>
+        <input type="text" formControlName="zanr" id="zanr" name="zanr" required>
+        <div class="validacija" *ngIf="filmForm.get('zanr')?.hasError('required') && filmForm.get('zanr')?.touched">
+            Zanr je obavezno polje
+        </div>
+
+        <label for="ocena">Ocena</label>
+        <input type="text" formControlName="ocena" id="ocena" name="ocena" required>
+        <div class="validacija" *ngIf="filmForm.get('ocena')?.hasError('required') && filmForm.get('ocena')?.touched">
+            Ocena je obavezno polje
+        </div>
+
+        <label for="brgledaoca">Broj gledaoca</label>
+        <input type="number" formControlName="brgledaoca" id="brgledaoca" name="brgledaoca" required>
+        <div class="validacija"
+            *ngIf="filmForm.controls['brgledaoca']?.hasError('required') && filmForm.controls['brgledaoca']?.touched">
+            Broj gledaoca je obavezno polje.
+        </div>
+        <div class="validacija"
+            *ngIf="filmForm && filmForm.controls['brgledaoca']?.hasError('min') && filmForm.controls['brgledaoca']?.touched">
+            Broj gledaoca ne sme biti manja od 0.
+        </div>
+        <div class="validacija"
+            *ngIf="filmForm && filmForm.controls['brgledaoca'] && filmForm.controls['brgledaoca']?.hasError('pattern') && filmForm.controls['brgledaoca']?.touched">
+            Unesite validnu numeričku vrednost.
+        </div>
+
+        <label for="cena">Cena</label>
+        <input type="number" formControlName="cena" id="cena" name="cena" required>
+        <div class="validacija"
+            *ngIf="filmForm.controls['cena']?.hasError('required') && filmForm.controls['cena']?.touched">
+            Cena je obavezno polje.
+        </div>
+        <div class="validacija"
+            *ngIf="filmForm && filmForm.controls['cena']?.hasError('min') && filmForm.controls['cena']?.touched">
+            Cena ne sme biti manja od 0.
+        </div>
+        <div class="validacija"
+            *ngIf="filmForm && filmForm.controls['cena'] && filmForm.controls['cena']?.hasError('pattern') && filmForm.controls['cena']?.touched">
+            Unesite validnu numeričku vrednost.
+        </div>
+        <div class="button-container">
+            <button type="button" class="btndodaj" (click)="dodajFilm()" [disabled]="filmForm.invalid">Dodaj
+                film</button>
+
+            <button type="button" class="btnazuriraj" (click)="sacuvajAzuriranje()"
+                [disabled]="filmForm.invalid">Sačuvaj ažuriranje</button>
+        </div>
+        <div *ngIf="showErrorMessage" class="error-message">
+            Popunite sve podatke.
+        </div>
+    </div>
+</form>

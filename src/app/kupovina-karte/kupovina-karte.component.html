@@ -1,0 +1,18 @@
+<div *ngIf="filmovi.length > 0" class="karta-detalji">
+    <h2>Karta detalji</h2>
+    <p>Naziv: {{ filmovi[0].naziv }}</p>
+    <p>Zanr: {{ filmovi[0].zanr }} h</p>
+    
+    <label for="brojgledaoca">Odaberite broj gledaoca:</label>
+    <input type="number" id="brojgledaoca" [(ngModel)]="brojgledaoca" required>
+  
+    <!-- Dodajte ovo unutar vašeg form elementa -->
+    <div class="checkbox-wrapper">
+      <label for="vip">Želim VIP mesto</label>
+      <input type="checkbox" id="vip" [(ngModel)]="zeliteVIP">
+    </div>
+  
+    <p class="ukupna-cena">Ukupna cena: {{ ukupnaCena() }} <b>RSD</b></p>
+  
+    <button (click)="zavrsiKupovinuKarte()">Kupi kartu</button>
+  </div>

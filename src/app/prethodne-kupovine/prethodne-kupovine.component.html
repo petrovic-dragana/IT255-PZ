@@ -1,0 +1,26 @@
+
+   <!-- prethodne-kupovine.component.html -->
+
+   <table class="custom-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>trajanje</th>
+        <th>Broj Gledaoca</th>
+        <th>Zelite VIP mesto</th>
+        <th>Ukupna Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let kupovina of kupovine">
+        <td>{{ kupovina.id }}</td>
+        <td>{{ kupovina.naziv }}</td>
+        <td>{{ kupovina.trajanje }}</td>
+        <td>{{ kupovina.brgledaoca }}</td>
+        <td>{{ kupovina.zeliteVIP ? 'Da' : 'Ne' }}</td>
+        <td>{{ kupovina.ukupnaCena }} <b>RSD</b></td>
+      </tr>
+    </tbody>
+  </table>
+  

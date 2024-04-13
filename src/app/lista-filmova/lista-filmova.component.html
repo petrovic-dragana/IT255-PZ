@@ -1,0 +1,32 @@
+<input type="text" [(ngModel)]="pretraga" placeholder="Unesite kriterijum pretrage" class="custom-input">
+<button (click)="pretrazi()">Pretraži</button> <button (click)="toggleSortiranjePoCeni()" class="sortiraj">Sortiraj po ceni</button>
+<table *ngIf="filmovi">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Trajanje</th>
+            <th>Zanr</th>
+            <th>Ocena</th>
+            <th>Broj gledaoca</th>
+            <th>Cena</th>
+            <th>Odaberi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let filmo of filmovi">
+            <td>{{filmo.naziv}}</td>
+            <td>{{filmo.trajanje}}</td>
+            <td>{{filmo.zanr}}</td>
+            <td>{{filmo.ocena}}</td>
+            <td>{{filmo.brgledaoca}}</td>
+            <td>{{filmo.cena}} <b>RSD</b></td>
+            <td>
+                <button (click)="kupiKartu(filmo.id)">Kupi kartu</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="!filmovi">
+    <p>Loading...</p>
+</div>
+<router-outlet></router-outlet>
